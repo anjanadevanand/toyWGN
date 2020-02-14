@@ -17,6 +17,10 @@
 
 > Write .Rd files in the man/ directory of the package  
 > roxygen2: can be used to create *.Rd files in the man/ directory for documentation. These files are used for documentation of the package, functions, and data. roxygen2 turns specifically formatted comments into .Rd files. It can also manage NAMESPACE and the Collate field in DESCRIPTION.  
+  
+_Note1_: The subscripts and superscripts in equations are not rendered correctly, need to look into this.  
+  
+_Note2_: Add NULL after @import or @importFrom roxygen comments, if these comments are used at the beginning of the file, separate from the comment block for a function.   
 
 ### 3.	Think about how you store data in the package (hint: there are at least two directories in the package where you can store data). Are there situations where JSON or YAML formats are useful for including as part of an R package?  
 
@@ -39,18 +43,33 @@
 >   
 > __4. tests/__  
 > It is okay to keep small data files for tests in this directory.  
-  
+
+### 4.	Develop a condition system that traps errors and provides useful warnings. What does this do not only to code robustness, but also to your coding style? 
+
+> Custom conditions are used to output metadata of errors and provide more useful error messages for function arguments.  
+>  
+> More complicated wrappers for conditionhandlers are mentioned in Chapter 8 of the Advanced R book. These applications are:  
+>   
+> 1.	To set the default failure value in case of an error  
+> 2.	To set both success and failure values while evaluating code  
+> 3.	To convert warning messages to errors and stop execution  
+> 4.	To record conditions for later investigation  
+> 5.	To implement a logging system based on conditions  
+>   
+> I can revisit these if they are useful for implementation in foreSIGHT.   
+>  
+> #### Effects of condition system on code and coding syle: 
+> -  
+> -  
+    
 ----------------------------------------------------------------------------------------------------------------
+### 5.	Use GitHub to help with version control (Sam can get you set up with a private account). Also develop an opinion on version numbering for your own package (e.g. when do you change version numbers, etc)
 
-### 4.	Use GitHub to help with version control (Sam can get you set up with a private account). Also develop an opinion on version numbering for your own package (e.g. when do you change version numbers, etc)
+### 6.	In addition to the core part of the code (i.e. the key algorithm), think about data input and output, plotting, diagnostics (e.g. does the stochastic generator simulate the same statistics as the observed data?), and so forth. I anticipate you’ll be writing quite a few functions for these features. 
 
-### 5.	In addition to the core part of the code (i.e. the key algorithm), think about data input and output, plotting, diagnostics (e.g. does the stochastic generator simulate the same statistics as the observed data?), and so forth. I anticipate you’ll be writing quite a few functions for these features. 
+### 7.	Implement plotting using the default R plots, as well as ggplot. What is the difference in approach? Do you have a preference? Read the ggplot book and form a view in terms of why this is becoming so popular but also why some people do not like it. 
 
-### 6.	Implement plotting using the default R plots, as well as ggplot. What is the difference in approach? Do you have a preference? Read the ggplot book and form a view in terms of why this is becoming so popular but also why some people do not like it. 
-
-### 7.	Think about a coding style guide. Hadley Wickham has developed one, and Google has made some suggested modifications (the link to this is mentioned in either the R Packages book or the Advanced R book). Why do you think Google has departed from Hadley’s style guide and which one do you think is better? Which one should we be using? 
-
-### 8.	Develop a condition system that traps errors and provides useful warnings. What does this do not only to code robustness, but also to your coding style? 
+### 8.	Think about a coding style guide. Hadley Wickham has developed one, and Google has made some suggested modifications (the link to this is mentioned in either the R Packages book or the Advanced R book). Why do you think Google has departed from Hadley’s style guide and which one do you think is better? Which one should we be using? 
 
 ### 9.	Implement some of the core algorithms in C++ using the RCpp package. There is a chapter on doing this and some basic C++ commands in the Advanced R book. 
 
