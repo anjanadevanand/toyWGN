@@ -22,6 +22,72 @@ NULL
 
 wgn_latent_model <- function(mu, sigma, alpha, lambda, tot_days) {
 
+  # Conditions on arguments,  1) Numeric
+  #==========================================================================================
+  if (!is.numeric(mu)) {
+    abort_bad_argument("mu", must = "be numeric", not = mu)
+  }
+
+  if (!is.numeric(sigma)) {
+    abort_bad_argument("sigma", must = "be numeric", not = sigma)
+  }
+
+  if (!is.numeric(alpha)) {
+    abort_bad_argument("alpha", must = "be numeric", not = alpha)
+  }
+
+  if (!is.numeric(lambda)) {
+    abort_bad_argument("lambda", must = "be numeric", not = lambda)
+  }
+
+  if (!is.numeric(tot_days)) {
+    abort_bad_argument("tot_days", must = "be numeric", not = tot_days)
+  }
+
+  # Conditions on arguments, 2 Length/dimension
+  #==========================================================================================
+  if (length(mu) != 1) {
+    abort_argument_dim("mu", must = "be a one number", not = mu)
+  }
+
+  if (length(sigma) != 1) {
+    abort_argument_dim("sigma", must = "be a one number", not = sigma)
+  }
+
+  if (length(alpha) != 1) {
+    abort_argument_dim("alpha", must = "be a one number", not = alpha)
+  }
+
+  if (length(lambda) != 1) {
+    abort_argument_dim("lambda", must = "be a one number", not = lambda)
+  }
+
+  if (length(tot_days) != 1) {
+    abort_argument_dim("tot_days", must = "be a one number", not = tot_days)
+  }
+
+
+  # Conditions on arguments, 3) Infeasible values
+  #==========================================================================================
+  if (sigma <= 0) {
+    abort_infeasible_argument("sigma", must = "be greater than zero", not = sigma)
+  }
+
+  if (alpha == 0 | alpha <= -1 | alpha >= 1) {
+    abort_infeasible_argument("alpha", must = "be non-zero, and fall between (-1, 1)", not = alpha)
+  }
+
+  if (lambda == 0) {
+    abort_infeasible_argument("lambda", must = "be non-zero", not = lambda)
+  }
+
+  if (tot_days <= 0 | tot_days %% 1 != 0) {
+    abort_infeasible_argument("tot_days", must = "be an integer greater than zero", not = tot_days)
+  }
+
+
+  # Code
+  #==========================================================================================
   X <- rep(0, tot_days)
   R <- rep(0, tot_days)
 
@@ -78,6 +144,84 @@ get_mon_indices <- function(date_vec) {
 #' @export
 
 gen_WGN_ts <- function(mu, sigma, alpha, lambda, nyears = 122, replicates = 20) {
+
+
+  # Conditions on arguments,  1) Numeric
+  #==========================================================================================
+  if (!is.numeric(mu)) {
+    abort_bad_argument("mu", must = "be numeric", not = mu)
+  }
+
+  if (!is.numeric(sigma)) {
+    abort_bad_argument("sigma", must = "be numeric", not = sigma)
+  }
+
+  if (!is.numeric(alpha)) {
+    abort_bad_argument("alpha", must = "be numeric", not = alpha)
+  }
+
+  if (!is.numeric(lambda)) {
+    abort_bad_argument("lambda", must = "be numeric", not = lambda)
+  }
+
+  if (!is.numeric(nyears)) {
+    abort_bad_argument("nyears", must = "be numeric", not = nyears)
+  }
+
+  if (!is.numeric(replicates)) {
+    abort_bad_argument("replicates", must = "be numeric", not = replicates)
+  }
+
+  # Conditions on arguments, 2 Length/dimension
+  #==========================================================================================
+  if (length(mu) != 12) {
+    abort_argument_dim("mu", must = "be of length 12", not = mu)
+  }
+
+  if (length(sigma) != 12) {
+    abort_argument_dim("sigma", must = "be of length 12", not = sigma)
+  }
+
+  if (length(alpha) != 12) {
+    abort_argument_dim("alpha", must = "be of length 12", not = alpha)
+  }
+
+  if (length(lambda) != 12) {
+    abort_argument_dim("lambda", must = "be of length 12", not = lambda)
+  }
+
+  if (length(nyears) != 1) {
+    abort_argument_dim("nyears", must = "be one number", not = nyears)
+  }
+
+  if (length(replicates) != 1) {
+    abort_argument_dim("replicates", must = "be one number", not = replicates)
+  }
+
+
+  # Conditions on arguments, 3) Infeasible values
+  #==========================================================================================
+  if (any(sigma <= 0)) {
+    abort_infeasible_argument("sigma", must = "be greater than zero", not = sigma[sigma <= 0])
+  }
+
+  if (any(alpha == 0) | any(alpha <= -1) | any(alpha >= 1)) {
+    abort_infeasible_argument("alpha", must = "be non-zero, and fall between (-1, 1)", not = alpha[alpha == 0 | alpha <= -1 | alpha >= 1])
+  }
+
+  if (any(lambda == 0)) {
+    abort_infeasible_argument("lambda", must = "be non-zero", not = lambda[lambda == 0])
+  }
+
+  if (nyears <= 0 | nyears %% 1 != 0) {
+    abort_infeasible_argument("nyears", must = "be an integer greater than zero", not = nyears)
+  }
+
+  if (replicates <= 0 | replicates %% 1 != 0) {
+    abort_infeasible_argument("replicates", must = "be an integer greater than zero", not = replicates)
+  }
+
+  # Code
 
   # Create a date vector for the time dimension of the WGN series & save indices for each month
   #===================================================================================================

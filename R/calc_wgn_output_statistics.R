@@ -27,6 +27,17 @@ NULL
 
 calc_ts_stats <- function(wgn_data_vec) {
 
+  # Conditions on arguments   1) Numeric with named date of format %Y-%m-%d
+  #=====================================================================================================
+
+  if (!is.numeric(wgn_data_vec)) {
+    abort_bad_argument("wgn_data_vec", must = "be numeric", not = wgn_data_vec)
+  }
+
+  if(any(is.na(as.Date(names(wgn_data_vec), "%Y-%m-%d"))) | is.null(names(wgn_data_vec))) {
+    abort_bad_argument("Names of wgn_data_vec", must = "be strings convertible as Dates of format %Y-%m-%d")
+  }
+
   ann_max <- sort(tapply(wgn_data_vec, as.POSIXlt(names(wgn_data_vec))$year, max))
   ann_tot <- sort(tapply(wgn_data_vec, as.POSIXlt(names(wgn_data_vec))$year, sum))
 
@@ -108,6 +119,13 @@ calc_ts_stats <- function(wgn_data_vec) {
 #' @export
 calc_rep_stats <- function(wgn_data_rep, nyears = NULL) {
 
+  # Conditions on arguments   1) Numeric list
+  #=====================================================================================================
+
+  if (!is.numeric(wgn_data_rep) | !is.list(wgn_data_rep)) {
+    abort_bad_argument("wgn_data_rep", must = "be a numeric list")
+  }
+
   # WGN statistics calculation - Loop over replicates
   #===================================================================================================
   # Annual rainfall total, Annual rainfall maximum - sorted
@@ -116,6 +134,8 @@ calc_rep_stats <- function(wgn_data_rep, nyears = NULL) {
   # Proportion of dry days by month (using all nyears of data)
 
   replicates <- length(wgn_data_rep)
+
+  # !!!!!!!!! NTS: Easier to take in nyears as an arg - do that
   if (is.null(nyears)) {nyears <- length(unique(as.POSIXlt(names(wgn_data_rep[[1]]))$year))}
 
   ann_tot_rep <- matrix(NA, nrow = nyears, ncol = replicates)
