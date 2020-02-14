@@ -2,7 +2,8 @@
 
 # Calculate Statistics
 #======================================================================================
-
+#' @importFrom stats sd cor var
+NULL
 
 #' Calculate statistics from a climate variable timeseries.
 #'
@@ -23,6 +24,7 @@
 #' \code{\%Y-\%m-\%d}; the input daily timeseries.
 #' @return A named list of vectors containing the calculated statistics.
 #' @export
+
 calc_ts_stats <- function(wgn_data_vec) {
 
   ann_max <- sort(tapply(wgn_data_vec, as.POSIXlt(names(wgn_data_vec))$year, max))

@@ -1,3 +1,6 @@
+#' @importFrom grDevices pdf dev.off
+#' @importFrom graphics par boxplot lines matplot
+NULL
 
 #' Plot statistics calculated from a climate variable timeseries.
 #'

@@ -1,3 +1,6 @@
+#' @importFrom stats rnorm
+NULL
+
 #' Generate timeseries of a climate variable using a latent-variable model.
 #'
 #' \code{wgn_latent_model} returns timeseries of a climate variable using the values present in its arguments.
