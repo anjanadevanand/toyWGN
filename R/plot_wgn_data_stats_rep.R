@@ -2,6 +2,9 @@
 #' @importFrom graphics par boxplot lines matplot
 NULL
 
+globalVariables(c("obs_ann_rain_max", "obs_ann_rain_tot", "obs_cor_wetdays_daily", "obs_mon_rain_mean",
+                  "obs_mon_rain_sd", "obs_pdry", "obs_var_wetdays_daily"))
+
 #' Plot statistics calculated from a climate variable timeseries.
 #'
 #' \code{plot_rep_stats} creates a plot of the statistics of the timeseries replicates
