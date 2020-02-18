@@ -34,7 +34,11 @@ calc_ts_stats <- function(wgn_data_vec) {
     abort_bad_argument("wgn_data_vec", must = "be numeric", not = wgn_data_vec)
   }
 
-  if(any(is.na(as.Date(names(wgn_data_vec), "%Y-%m-%d"))) | is.null(names(wgn_data_vec))) {
+  if(is.null(names(wgn_data_vec))) {
+    abort_bad_argument("Names of wgn_data_vec", must = "be strings convertible as Dates of format %Y-%m-%d")
+  }
+
+  if (any(is.na(as.Date(names(wgn_data_vec), "%Y-%m-%d")))) {
     abort_bad_argument("Names of wgn_data_vec", must = "be strings convertible as Dates of format %Y-%m-%d")
   }
 
