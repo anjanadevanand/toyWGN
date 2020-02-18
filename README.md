@@ -76,7 +76,7 @@ _Note2_: Add NULL after @import or @importFrom roxygen comments, if these commen
 
 ### 4.	Develop a condition system that traps errors and provides useful warnings. What does this do not only to code robustness, but also to your coding style? 
 
-> Custom conditions are used to output metadata of errors and provide more useful error messages for function arguments. I have used `rlang::abort()` to signal errors of the same style and store additional metadata about the error. The advantage of `rlang::abort()` over `base::stop()` is the ability to contain metadata.
+> Custom conditions are used to output metadata of errors and provide more useful error messages for function arguments. I have used `rlang::abort()` to signal errors of the same style and store additional metadata about the error (Advanced R, Ch 8.5). The advantage of `rlang::abort()` over `base::stop()` is the ability to contain metadata.
 >  
 > More complicated wrappers for conditionhandlers are mentioned in Chapter 8 of the Advanced R book. These applications are:  
 >   
