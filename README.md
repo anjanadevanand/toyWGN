@@ -11,7 +11,7 @@
 >  
 > __tests/__  
 >  
-> __data/__ - contains *.rda files that are to be distributed with the package  
+> __data/__ - contains *.rda files that are to be distributed with the package. May contain files in *.R or *.csv formats as well.    
 >  
 > __man/__ - contains *.Rd files for documentation of package, functions and data. These files may be written manually or created using roxygen2.  
 >  
@@ -103,7 +103,16 @@ _Note2_: Add NULL after @import or @importFrom roxygen comments, if these commen
 >  
 > ----------------------------------------------------------------------------------------------------------------  
 ### 6.	Think about a coding style guide. Hadley Wickham has developed one, and Google has made some suggested modifications (the link to this is mentioned in either the R Packages book or the Advanced R book). Why do you think Google has departed from Hadley’s style guide and which one do you think is better? Which one should we be using? 
-
+>  
+>  __Function names:__
+> - Tidyverse syle guide recommends using `snake_case` for all objects - using verbs for function names and nouns for other objects.   
+> - Google style guide recommends using `BigCamelCase` for function names to distinguish them from other objects.  
+> - Since foreSIGHT currently uses `smallCamelCase` for function names, it may be better to stick with it. 
+>  
+> __Internal functions:__
+> - Google style guide recommends starting internal functions with a period (`.`). 
+> - Tidyverse style guide does not mention a different naming convention for internal functions. They recommend identifying internal functions using specifc roxygen tags in the documentation `@keywords internal` and `@noRd`.
+> 
 ### 7.	In addition to the core part of the code (i.e. the key algorithm), think about data input and output, plotting, diagnostics (e.g. does the stochastic generator simulate the same statistics as the observed data?), and so forth. I anticipate you’ll be writing quite a few functions for these features. 
 
 ### 8.	Implement plotting using the default R plots, as well as ggplot. What is the difference in approach? Do you have a preference? Read the ggplot book and form a view in terms of why this is becoming so popular but also why some people do not like it. 
