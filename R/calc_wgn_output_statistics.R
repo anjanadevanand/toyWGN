@@ -119,6 +119,7 @@ calc_ts_stats <- function(wgn_data_vec) {
 #' @param wgn_data_rep A list of vectors containing the replicates of input timeseries.
 #' Each element of the list should be a named vector of numbers with names as character dates of the form
 #' \code{\%Y-\%m-\%d}.
+#' @param nyears number of years of data in the input, \code{wgn_data_rep}
 #' @return A named list of dataframes containing the calculated statistics.
 #' @export
 calc_rep_stats <- function(wgn_data_rep, nyears = NULL) {
@@ -126,8 +127,8 @@ calc_rep_stats <- function(wgn_data_rep, nyears = NULL) {
   # Conditions on arguments   1) Numeric list
   #=====================================================================================================
 
-  if (!is.numeric(wgn_data_rep) | !is.list(wgn_data_rep)) {
-    abort_bad_argument("wgn_data_rep", must = "be a numeric list")
+  if (!is.list(wgn_data_rep)) {
+    abort_bad_argument("wgn_data_rep", must = "be a list of data vectors")
   }
 
   # WGN statistics calculation - Loop over replicates

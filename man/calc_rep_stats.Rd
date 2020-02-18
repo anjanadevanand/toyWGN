@@ -10,6 +10,8 @@ calc_rep_stats(wgn_data_rep, nyears = NULL)
 \item{wgn_data_rep}{A list of vectors containing the replicates of input timeseries.
 Each element of the list should be a named vector of numbers with names as character dates of the form
 \code{\%Y-\%m-\%d}.}
+
+\item{nyears}{number of years of data in the input, \code{wgn_data_rep}}
 }
 \value{
 A named list of dataframes containing the calculated statistics.
