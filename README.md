@@ -76,7 +76,7 @@ _Note2_: Add NULL after @import or @importFrom roxygen comments, if these commen
 
 ### 4.	Develop a condition system that traps errors and provides useful warnings. What does this do not only to code robustness, but also to your coding style? 
 
-> Custom conditions are used to output metadata of errors and provide more useful error messages for function arguments.  
+> Custom conditions are used to output metadata of errors and provide more useful error messages for function arguments. I have used `rlang::abort()` to signal errors of the same style and store additional metadata about the error. The advantage of `rlang::abort()` over `base::stop()` is the ability to contain metadata.
 >  
 > More complicated wrappers for conditionhandlers are mentioned in Chapter 8 of the Advanced R book. These applications are:  
 >   
@@ -88,18 +88,25 @@ _Note2_: Add NULL after @import or @importFrom roxygen comments, if these commen
 >   
 > I can revisit these if they are useful for implementation in foreSIGHT.   
 >  
-> #### Effects of condition system on code and coding syle: 
-> -  
-> -  
+> #### Effects of condition system on coding syle (custom condition system vs. default stop messages): 
+> -  Output error messages of same style in the package (error_bad_argument, error_infeasible_argument, error_argument_dimension)  
+> -  When custom conditions to handle various types of errors are in place, the code is more uniform to read.
     
-----------------------------------------------------------------------------------------------------------------
 ### 5.	Use GitHub to help with version control (Sam can get you set up with a private account). Also develop an opinion on version numbering for your own package (e.g. when do you change version numbers, etc)
+> #### GitHub training presentation
+> https://github.com/IMMM-SFA/git-training/blob/master/materials/Presentation.pptx
+> 
+> #### Version Numbering  
+> ?  
+> https://semver.org/#faq  
+> https://blog.codeship.com/best-practices-when-versioning-a-release/  
+>  
+> ----------------------------------------------------------------------------------------------------------------  
+### 6.	Think about a coding style guide. Hadley Wickham has developed one, and Google has made some suggested modifications (the link to this is mentioned in either the R Packages book or the Advanced R book). Why do you think Google has departed from Hadley’s style guide and which one do you think is better? Which one should we be using? 
 
-### 6.	In addition to the core part of the code (i.e. the key algorithm), think about data input and output, plotting, diagnostics (e.g. does the stochastic generator simulate the same statistics as the observed data?), and so forth. I anticipate you’ll be writing quite a few functions for these features. 
+### 7.	In addition to the core part of the code (i.e. the key algorithm), think about data input and output, plotting, diagnostics (e.g. does the stochastic generator simulate the same statistics as the observed data?), and so forth. I anticipate you’ll be writing quite a few functions for these features. 
 
-### 7.	Implement plotting using the default R plots, as well as ggplot. What is the difference in approach? Do you have a preference? Read the ggplot book and form a view in terms of why this is becoming so popular but also why some people do not like it. 
-
-### 8.	Think about a coding style guide. Hadley Wickham has developed one, and Google has made some suggested modifications (the link to this is mentioned in either the R Packages book or the Advanced R book). Why do you think Google has departed from Hadley’s style guide and which one do you think is better? Which one should we be using? 
+### 8.	Implement plotting using the default R plots, as well as ggplot. What is the difference in approach? Do you have a preference? Read the ggplot book and form a view in terms of why this is becoming so popular but also why some people do not like it. 
 
 ### 9.	Implement some of the core algorithms in C++ using the RCpp package. There is a chapter on doing this and some basic C++ commands in the Advanced R book. 
 
