@@ -113,6 +113,7 @@ wgn_latent_model <- function(mu, sigma, alpha, lambda, tot_days) {
 #' @param date_vec vector of dates of class \code{Date} or \code{character}
 #' @return list of indices of dates corresponding to each month
 #' @keywords internal
+#' @noRd
 
 get_mon_indices <- function(date_vec) {
 

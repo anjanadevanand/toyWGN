@@ -7,6 +7,7 @@
 #' @param must string specifying the desired type of \code{arg}
 #' @param not current value of the \code{arg}
 #' @keywords internal
+#' @noRd
 
 abort_bad_argument <- function(arg, must, not = NULL) {
   msg <- glue::glue("'{arg}` must {must}")
@@ -30,6 +31,7 @@ abort_bad_argument <- function(arg, must, not = NULL) {
 #' @param arg argument causing the error
 #' @param must string specifying the infeasibility of \code{arg}
 #' @keywords internal
+#' @noRd
 
 abort_infeasible_argument <- function(arg, must, not) {
   msg <- glue::glue("'{arg}` must {must}; not {not}")
@@ -50,6 +52,7 @@ abort_infeasible_argument <- function(arg, must, not) {
 #' @param must string specifying the desired dimension of \code{arg}
 #' @param not current value of the \code{arg}
 #' @keywords internal
+#' @noRd
 
 abort_argument_dim <- function(arg, must, not = NULL) {
   msg <- glue::glue("'{arg}` must {must}")
