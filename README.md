@@ -20,6 +20,8 @@
 > __src/__ - contains *.cpp files  
 >  
 > Other directories: __demo/__,  __exec/__, __po/__, __tools/__, __vignettes/__  
+>  
+> Note: README.md appears to be a valid top-level directory component in a bundled source package
 
 ### 2.	Include detailed documentation. What forms of documentation should accompany the code (e.g. help files, readme files, vignettes, comments)? Can you implement roxygen and rmarkdown?  
 
