@@ -74,7 +74,11 @@ _Note2_: Add NULL after @import or @importFrom roxygen comments, if these commen
 >  #### Examples from other packages
 >  Separate package for a huge dataset that can be used by multiple other packages: https://github.com/hadley/nycflights13  
 >  Package that contains R code to generate data in the __data/__ directory: https://github.com/cran/stacomiR/blob/master/inst/config/generate_data.R. Note: This is different from keeping an *.R code directly in the __data/__ directory.  
->  
+>   
+> #### Package wide global variables stored in an separate environment?
+> 1. https://stackoverflow.com/questions/12598242/global-variables-in-packages-in-r  
+> 2. https://www.r-bloggers.com/global-variables-in-r-packages/   
+> 3. https://www.r-bloggers.com/package-wide-variablescache-in-r-packages/  
 
 ### 4.	Develop a condition system that traps errors and provides useful warnings. What does this do not only to code robustness, but also to your coding style? 
 
