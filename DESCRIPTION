@@ -6,7 +6,7 @@ Author: Anjana Devanand
 Maintainer: Anjana Devanand <yourself@somewhere.net>
 Description: A toy package to generate stochastic time series of climate variables, 
     compute time series statistics, and create plots to compare the statistics with observed data.
-License: TBD
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.0.2
