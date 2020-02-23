@@ -129,22 +129,28 @@ get_mon_indices <- function(date_vec) {
 #'
 #' \code{gen_WGN_ts} returns replicates of timeseries of a climate variable using the function \code{wgn_latent_model}.
 #'
-#' @param mu vector of numbers of length 12; mean of the latent variable \emph{X} for each month.
-#' @param sigma vector of numbers of length 12; standard deviaion of the latent variable \emph{X} for each month.
+#' The parameters of the weather generator are stored in toyWGN_param.env. Use functions \code{modify_namelist}
+#' to modfiy the default parameters of the weather generator. This WGN model uses the parameters:
+#' \Itemize{
+#'     \item mu vector of numbers of length 12; mean of the latent variable \emph{X} for each month.
+#'     \item sigma vector of numbers of length 12; standard deviaion of the latent variable \emph{X} for each month.
 #' @param alpha vector of numbers of length 12; lag-1 autocorrelation coefficient of the latent variable \emph{X} for each month.
 #' @param lambda vector of numbers of length 12; exponent of the latent variable \emph{X} for each month.
 #' @param nyears number of years of data to be generated.
 #' @param replicates number of replicates of the timeseries to be generated.
 #' @return A list of length \code{replicates} containing the replicates of \code{nyears} of climate variable timeseries.
+#' @seealso \code{write_namelist} \code{modify_namelist}
 #' @examples
-#' mu <- c(-2, -4, -3, -2, -1, -1, -0.5, -0.5, -1, -2, -2, -3)
-#' sigma <- c(1, 1.2, 1.5, 1.4, 1, 1, 1.1, 0.8, 0.7, 0.7, 0.9, 1)
-#' alpha <- c(0.8, 0.7, 0.6, 0.55, 0.5, 0.4, 0.45, 0.5, 0.6, 0.7, 0.75, 0.8)
-#' lambda <- c(1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2)
-#' wgn_data_rep <- gen_WGN_ts(mu, sigma, alpha, lambda, nyears = 10, replicates = 5)
+#' wgn_data_rep <- gen_WGN_ts(nyears = 10, replicates = 5)
 #' @export
 
-gen_WGN_ts <- function(mu, sigma, alpha, lambda, nyears = 122, replicates = 20) {
+gen_WGN_ts <- function(nyears = 122, replicates = 20) {
+
+  # Get parameters from parameter environment
+  #==========================================================================================
+  mu <- toyWGN_param.env$mu
+  sigma <- toyWGN_param.env$sigma
+  alpha <-
 
 
   # Conditions on arguments,  1) Numeric
