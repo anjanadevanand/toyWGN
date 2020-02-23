@@ -1,6 +1,8 @@
 #' @importFrom stats rnorm
 NULL
 
+#******** CONVERT 'wgn_latent_model' FUNCTION INTO AN INTERNAL FUNCTION LATER ***********************
+
 #' Generate timeseries of a climate variable using a latent-variable model.
 #'
 #' \code{wgn_latent_model} returns timeseries of a climate variable using the values present in its arguments.
@@ -131,11 +133,12 @@ get_mon_indices <- function(date_vec) {
 #'
 #' The parameters of the weather generator are stored in toyWGN_param.env. Use functions \code{modify_namelist}
 #' to modfiy the default parameters of the weather generator. This WGN model uses the parameters:
-#' \Itemize{
+#' \Itemize {
 #'     \item mu vector of numbers of length 12; mean of the latent variable \emph{X} for each month.
 #'     \item sigma vector of numbers of length 12; standard deviaion of the latent variable \emph{X} for each month.
-#' @param alpha vector of numbers of length 12; lag-1 autocorrelation coefficient of the latent variable \emph{X} for each month.
-#' @param lambda vector of numbers of length 12; exponent of the latent variable \emph{X} for each month.
+#'     \item alpha vector of numbers of length 12; lag-1 autocorrelation coefficient of the latent variable \emph{X} for each month.
+#'     \item lambda vector of numbers of length 12; exponent of the latent variable \emph{X} for each month.
+#'     }
 #' @param nyears number of years of data to be generated.
 #' @param replicates number of replicates of the timeseries to be generated.
 #' @return A list of length \code{replicates} containing the replicates of \code{nyears} of climate variable timeseries.
@@ -150,7 +153,8 @@ gen_WGN_ts <- function(nyears = 122, replicates = 20) {
   #==========================================================================================
   mu <- toyWGN_param.env$mu
   sigma <- toyWGN_param.env$sigma
-  alpha <-
+  alpha <- toyWGN_param.env$alpha
+  lambda <- toyWGN_param.env$lambda
 
 
   # Conditions on arguments,  1) Numeric
