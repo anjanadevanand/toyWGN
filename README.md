@@ -84,7 +84,7 @@ _Note2_: Add NULL after @import or @importFrom roxygen comments, if these commen
 
 > Custom conditions are used to output metadata of errors and provide more useful error messages for function arguments. I have used `rlang::abort()` to signal errors of the same style and store additional metadata about the error (Advanced R, Ch 8.5). The advantage of `rlang::abort()` over `base::stop()` is the ability to contain metadata.
 >  
-> More complicated wrappers for conditionhandlers are mentioned in Chapter 8 of the Advanced R book. These applications are:  
+> Note: More complicated wrappers for conditionhandlers are mentioned in Chapter 8 of the Advanced R book. These applications are:  
 >   
 > 1.	To set the default failure value in case of an error  
 > 2.	To set both success and failure values while evaluating code  
@@ -92,22 +92,46 @@ _Note2_: Add NULL after @import or @importFrom roxygen comments, if these commen
 > 4.	To record conditions for later investigation  
 > 5.	To implement a logging system based on conditions  
 >   
-> I can revisit these if they are useful for implementation in foreSIGHT.   
+> I can revisit these if they are useful for implementation in foreSIGHT. 
 >  
 > #### Effects of condition system on coding syle (custom condition system vs. default stop messages): 
 > -  Output error messages of same style in the package (error_bad_argument, error_infeasible_argument, error_argument_dimension)  
-> -  When custom conditions to handle various types of errors are in place, the code is more uniform to read.
+> -  When custom conditions are in place, the code is more uniform to read.  
+> -  The condition system leads you to classify potential errors into groups (eg: type-mismatch, dimension mismatch, infeasible range), so that each group may be handled with a common type of custom error message. This also serves as a reminder to include all the potential error checks while writing new functions.  
+> 
+> #### Additional Discussion Points  
+> Where should you signal errors that are due to user input?  
+> - At the time of input. If the parameter input is separated from the function call, a checker function may be used to signal errors and warnings immediately
+> - At the top level function call.  
+> - At the level of internal function call.  Here, the user may need to go through multiple iterations to fix the same error in multiple instances.  
+>
+> ### Basic Notes on Conditions and Condition Handling
+> #### Conditions
+> Base R functions: `stop("Error")`, `warning("warning message")`, `message("informative message")`  
+> `rlang` equivalent to `stop("Error")` : `rlang::abort("Error")`, which can store additional metadata about the error.
+> Tidyverse style guide includes recommendations for writing informative error and warning messages. See Point 6 below for a Summary.  
+> 
+> #### Ignore Conditions  
+> Base R functions: `try()`, `suppressWarnings()`, `suppressMessages()`  
+> 
+> #### Handle Conditions  
+> Conditionhandlers are used to supplement or temporarily override the default behaviour in case of a condition (error, warning, message)
+> Condition object: List with 2 elements, 
+> - `message` : a character vector containing text to display. Can be accessed using `conditionMessage(cnd)`    
+> - `call` : call that triggered the condition. Can be accessed using `conditionCall(cnd)`  
+>   
+> Base R functions to handle a condition object: `tryCatch()`, `withCallingHandlers()`  
+> Custom conditions can be created using `rlang::abort()` to store additional information about the error to use for debugging.  
     
 ### 5.	Use GitHub to help with version control (Sam can get you set up with a private account). Also develop an opinion on version numbering for your own package (e.g. when do you change version numbers, etc)
 > #### GitHub training presentation
 > https://github.com/IMMM-SFA/git-training/blob/master/materials/Presentation.pptx
 > 
 > #### Version Numbering  
-> ?  
+> major.minor.patch  
 > https://semver.org/#faq  
 > https://blog.codeship.com/best-practices-when-versioning-a-release/  
 >  
-> ----------------------------------------------------------------------------------------------------------------  
 ### 6.	Think about a coding style guide. Hadley Wickham has developed one, and Google has made some suggested modifications (the link to this is mentioned in either the R Packages book or the Advanced R book). Why do you think Google has departed from Hadley’s style guide and which one do you think is better? Which one should we be using? 
 >  
 >  __Function names:__
@@ -117,8 +141,12 @@ _Note2_: Add NULL after @import or @importFrom roxygen comments, if these commen
 >  
 > __Internal functions:__
 > - Google style guide recommends starting internal functions with a period (`.`). 
-> - Tidyverse style guide does not mention a different naming convention for internal functions. They recommend identifying internal functions using specifc roxygen tags in the documentation `@keywords internal` and `@noRd`.
+> - Tidyverse style guide does not mention a different naming convention for internal functions. They recommend identifying internal functions using specifc roxygen tags in the documentation `@keywords internal` and `@noRd`.  
+>
+> __Error messages:__
 > 
+> ----------------------------------------------------------------------------------------------------------------  
+
 ### 7.	In addition to the core part of the code (i.e. the key algorithm), think about data input and output, plotting, diagnostics (e.g. does the stochastic generator simulate the same statistics as the observed data?), and so forth. I anticipate you’ll be writing quite a few functions for these features. 
 
 ### 8.	Implement plotting using the default R plots, as well as ggplot. What is the difference in approach? Do you have a preference? Read the ggplot book and form a view in terms of why this is becoming so popular but also why some people do not like it. 
