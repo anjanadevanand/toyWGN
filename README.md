@@ -28,11 +28,11 @@
 > Write .Rd files in the man/ directory of the package  
 > roxygen2: can be used to create *.Rd files in the man/ directory for documentation. These files are used for documentation of the package, functions, and data. roxygen2 turns specifically formatted comments into .Rd files. It can also manage NAMESPACE and the Collate field in DESCRIPTION.  
   
-_Note1_: The subscripts and superscripts in equations are not rendered correctly using roxygen2, need to look into this.  
-  
-_Note2_: Add NULL after @import or @importFrom roxygen comments, if these comments are used at the beginning of the file, separate from the comment block for a function.   
-
-*yet to look into vignettes
+> _Note1_: The subscripts and superscripts in equations are not rendered correctly using roxygen2, need to look into this. There does not appear to be a fix for this. Subscripts and superscripts will be rendered correctly in the pdf version of the document, but not the html R helpfiles.  
+>   
+> _Note2_: Add NULL after @import or @importFrom roxygen comments, if these comments are used at the beginning of the file, separate from the comment block for a function.   
+>  
+> *yet to look into vignettes  
 
 ### 3.	Think about how you store data in the package (hint: there are at least two directories in the package where you can store data). Are there situations where JSON or YAML formats are useful for including as part of an R package? In foreSIGHT there are a number of ‘data’ categories that are hard-coded within functions (e.g. default parameter values) and I’m wondering whether this should be separated out from the function and included as a distinct file.
 
