@@ -106,7 +106,10 @@ __4. tests/__
 > - At the time of input. If the parameter input is separate from the function call that uses the parameters, a checker function may be used to signal errors and warnings immediately at the time of input.  
 > - At the top level function call.  
 > - At the level of internal function call.  Here the user may need to go through multiple iterations to fix the same error in multiple instances.  
->
+>  
+> Condition system for internal functions that do not interact with user inputs?  
+> 
+**********************
 #### Notes on Conditions and Condition Handling
 ##### Conditions
 > Base R functions: `stop("Error")`, `warning("warning message")`, `message("informative message")`  
