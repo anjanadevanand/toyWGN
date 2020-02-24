@@ -131,18 +131,18 @@ get_mon_indices <- function(date_vec) {
 #'
 #' \code{gen_WGN_ts} returns replicates of timeseries of a climate variable using the function \code{wgn_latent_model}.
 #'
-#' The parameters of the weather generator are stored in toyWGN_param.env. Use functions \code{modify_namelist}
+#' The parameters of the weather generator are stored in toyWGN_param.env. The user may use the function \code{modify_namelist}
 #' to modfiy the default parameters of the weather generator. This WGN model uses the parameters:
-#' \Itemize {
-#'     \item mu vector of numbers of length 12; mean of the latent variable \emph{X} for each month.
-#'     \item sigma vector of numbers of length 12; standard deviaion of the latent variable \emph{X} for each month.
-#'     \item alpha vector of numbers of length 12; lag-1 autocorrelation coefficient of the latent variable \emph{X} for each month.
-#'     \item lambda vector of numbers of length 12; exponent of the latent variable \emph{X} for each month.
-#'     }
+#' \itemize{
+#'   \item mu vector of numbers of length 12; mean of the latent variable \emph{X} for each month.
+#'   \item sigma vector of numbers of length 12; standard deviaion of the latent variable \emph{X} for each month.
+#'   \item alpha vector of numbers of length 12; lag-1 autocorrelation coefficient of the latent variable \emph{X} for each month.
+#'   \item lambda vector of numbers of length 12; exponent of the latent variable \emph{X} for each month.
+#'   }
 #' @param nyears number of years of data to be generated.
 #' @param replicates number of replicates of the timeseries to be generated.
 #' @return A list of length \code{replicates} containing the replicates of \code{nyears} of climate variable timeseries.
-#' @seealso \code{write_namelist} \code{modify_namelist}
+#' @seealso \code{write_namelist}, \code{modify_namelist}
 #' @examples
 #' wgn_data_rep <- gen_WGN_ts(nyears = 10, replicates = 5)
 #' @export

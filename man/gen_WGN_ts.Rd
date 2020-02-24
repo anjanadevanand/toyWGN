@@ -4,17 +4,9 @@
 \alias{gen_WGN_ts}
 \title{Generate replicates of timeseries of a climate variable using a monthly latent variable model.}
 \usage{
-gen_WGN_ts(mu, sigma, alpha, lambda, nyears = 122, replicates = 20)
+gen_WGN_ts(nyears = 122, replicates = 20)
 }
 \arguments{
-\item{mu}{vector of numbers of length 12; mean of the latent variable \emph{X} for each month.}
-
-\item{sigma}{vector of numbers of length 12; standard deviaion of the latent variable \emph{X} for each month.}
-
-\item{alpha}{vector of numbers of length 12; lag-1 autocorrelation coefficient of the latent variable \emph{X} for each month.}
-
-\item{lambda}{vector of numbers of length 12; exponent of the latent variable \emph{X} for each month.}
-
 \item{nyears}{number of years of data to be generated.}
 
 \item{replicates}{number of replicates of the timeseries to be generated.}
@@ -25,10 +17,19 @@ A list of length \code{replicates} containing the replicates of \code{nyears} of
 \description{
 \code{gen_WGN_ts} returns replicates of timeseries of a climate variable using the function \code{wgn_latent_model}.
 }
+\details{
+The parameters of the weather generator are stored in toyWGN_param.env. The user may use the function \code{modify_namelist}
+to modfiy the default parameters of the weather generator. This WGN model uses the parameters:
+\itemize{
+  \item mu vector of numbers of length 12; mean of the latent variable \emph{X} for each month.
+  \item sigma vector of numbers of length 12; standard deviaion of the latent variable \emph{X} for each month.
+  \item alpha vector of numbers of length 12; lag-1 autocorrelation coefficient of the latent variable \emph{X} for each month.
+  \item lambda vector of numbers of length 12; exponent of the latent variable \emph{X} for each month.
+  }
+}
 \examples{
-mu <- c(-2, -4, -3, -2, -1, -1, -0.5, -0.5, -1, -2, -2, -3)
-sigma <- c(1, 1.2, 1.5, 1.4, 1, 1, 1.1, 0.8, 0.7, 0.7, 0.9, 1)
-alpha <- c(0.8, 0.7, 0.6, 0.55, 0.5, 0.4, 0.45, 0.5, 0.6, 0.7, 0.75, 0.8)
-lambda <- c(1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2)
-wgn_data_rep <- gen_WGN_ts(mu, sigma, alpha, lambda, nyears = 10, replicates = 5)
+wgn_data_rep <- gen_WGN_ts(nyears = 10, replicates = 5)
+}
+\seealso{
+\code{write_namelist}, \code{modify_namelist}
 }

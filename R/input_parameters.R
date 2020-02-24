@@ -7,15 +7,13 @@ toyWGN_param.env$sigma <- c(1, 1.2, 1.5, 1.4, 1, 1, 1.1, 0.8, 0.7, 0.7, 0.9, 1)
 toyWGN_param.env$alpha <- c(0.8, 0.7, 0.6, 0.55, 0.5, 0.4, 0.45, 0.5, 0.6, 0.7, 0.75, 0.8)
 toyWGN_param.env$lambda <- c(1.8, 1.8, 1.8, 1.8, 1.8, 1.8, 1.8, 1.8, 1.8, 1.8, 1.8, 1.8)
 
-
+# NOTE: Need to think about how to include examples for modify_namelist using an input JSON file in the top level directory
 #' Modify parameters of the weather generator
 #'
 #' \code{modify_namelist} modifes the values of the WGN parameters as per user input
 #'
 #' @param user_file A JSON file; containing name value pairs of the user input parameters
 #' @return The function does not return anything. It modifies the parameter values inside the parameter environment in place.
-#' @examples
-#' modify_namelist()
 #' @export
 
 modify_namelist <- function(user_file = "user_namelist.json") {
@@ -31,7 +29,7 @@ modify_namelist <- function(user_file = "user_namelist.json") {
 #'
 #' \code{output_namelist} writes the current value of the WGN parameters to a JSON file
 #'
-#' @param output_file the name of the JSON file to be output
+#' @param out_file the name of the JSON file to be output
 #' @return The current value of all the WGN parameters in the JSON file
 #' @export
 

@@ -15,6 +15,3 @@ The function does not return anything. It modifies the parameter values inside t
 \description{
 \code{modify_namelist} modifes the values of the WGN parameters as per user input
 }
-\examples{
-modify_namelist()
-}

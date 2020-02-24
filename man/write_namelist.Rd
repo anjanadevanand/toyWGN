@@ -7,7 +7,7 @@
 write_namelist(out_file = "output_namelist")
 }
 \arguments{
-\item{output_file}{the name of the JSON file to be output}
+\item{out_file}{the name of the JSON file to be output}
 }
 \value{
 The current value of all the WGN parameters in the JSON file
