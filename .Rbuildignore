@@ -6,3 +6,4 @@ working.R
 NAMESPACE_old
 Rpackage_considerations.docx
 set_input_parameters_run_WGN.R
+condition_test_code.R
