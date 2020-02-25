@@ -25,9 +25,9 @@ The climate timeseries of length \code{tot_days}.
 }
 \details{
 The latent-variable model used by this function is of the form
-\deqn{X_t = \alpha(X_{t-1} - \mu) + \epsilon_t}
+\deqn{X_t = \alpha*X_{t-1} + \epsilon_t}
 \deqn{\epsilon_t ~ N(0, \sigma^2)}
-\deqn{R = X^\lambda if X > 0}
+\deqn{R = (X + \mu)^\lambda if (X + \mu) > 0}
 }
 \examples{
 wgn_latent_model(-2, 1, 0.8, 1.2, 100)

@@ -8,9 +8,9 @@ NULL
 #' \code{wgn_latent_model} returns timeseries of a climate variable using the values present in its arguments.
 #'
 #' The latent-variable model used by this function is of the form
-#' \deqn{X_t = \alpha(X_{t-1} - \mu) + \epsilon_t}
+#' \deqn{X_t = \alpha*X_{t-1} + \epsilon_t}
 #' \deqn{\epsilon_t ~ N(0, \sigma^2)}
-#' \deqn{R = X^\lambda if X > 0}
+#' \deqn{R = (X + \mu)^\lambda if (X + \mu) > 0}
 #'
 #' @param mu A number; mean of the latent variable \emph{X}.
 #' @param sigma A number; standard deviaion of the latent variable \emph{X}.
