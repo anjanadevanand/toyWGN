@@ -109,7 +109,7 @@ __4. tests/__
 >  
 > Condition system for internal functions that do not interact with user inputs?  
 > 
-> Formatting of error messages? Tidyverse style guide recommendations about bulleting error messages, and providing information about multiple issues in a single pass.
+> Formatting of error messages? Tidyverse style guide recommends bulleting error messages, and providing information about multiple issues in a single pass.
 
 **********************
 #### Notes on Conditions and Condition Handling
@@ -156,13 +156,16 @@ __Error messages:__
 > - Do your best to reveal lcoation, name and/or content of the troublesome component.  
 > eg: Error: Each result must be a single integer:  
 >    * Result 1 is a character vector.  
-> - If the source is unclear, avoid pointing user in the wrong direction.  
+> - If the source is unclear, avoid pointing the user in the wrong direction.  
 > - If there are multiple issues, prefer to use a bulleted list. If the list is too long, truncate to show only a first few.  
-> - Provide hints only for common errors. End hind with a question mark.  
+> - Provide hints only for common errors. End the hint with a question mark.  
 
 ***************
 
 ### 7.	Implement unit testing in the package throughout, using the Test That package. What does unit testing do to your coding style? Does it change how you implement functions in R?
+
+#### Discussion Points
+> Strategy to implement `expect_equal()` type of unit tests for functions with stochastic return values.  
 
 #### Notes on Unit Testing
 > Formal automated testing using the `testthat` package.  
