@@ -160,8 +160,6 @@ __Error messages:__
 > - If there are multiple issues, prefer to use a bulleted list. If the list is too long, truncate to show only a first few.  
 > - Provide hints only for common errors. End the hint with a question mark.  
 
-***************
-
 ### 7.	Implement unit testing in the package throughout, using the Test That package. What does unit testing do to your coding style? Does it change how you implement functions in R?
 
 #### Discussion Points
@@ -185,14 +183,61 @@ test_that("functionality description", {
 > Commonly used expectations: `expect_equal()`, `expect_identical()`, `expect_match()`, `expect_output()`, `expect_warning()`, `expect_error()`, `expect_is()`, `expect_true()`, `expect_false()`, `expect_equal_to_reference()`
 >  
 
-### 8.	In addition to the core part of the code (i.e. the key algorithm), think about data input and output, plotting, diagnostics (e.g. does the stochastic generator simulate the same statistics as the observed data?), and so forth. I anticipate you’ll be writing quite a few functions for these features. 
+### 8.	Implement the three different object systems (S3, S4, R6). What is the difference between them? When should you use one over the other? 
 
-### 9.	Implement plotting using the default R plots, as well as ggplot. What is the difference in approach? Do you have a preference? Read the ggplot book and form a view in terms of why this is becoming so popular but also why some people do not like it. 
+### Notes on the Object Systems in R
+### Why an object system?
+Code Sharing - to have functions that behave differently for different objects, with the same external interface.  
+eq: `print(as.Date("2020/01/01"))` behaves differently from `print("2020/01/01")`  
 
-### 10.	Implement some of the core algorithms in C++ using the RCpp package. There is a chapter on doing this and some basic C++ commands in the Advanced R book. 
 
-### 11.	Implement the three different object systems (S3, S4, R6). What is the difference between them? When should you use one over the other? 
+### Two Types of Objects in R
+1. Base Objects. These objects come from S, and were developed before object oriented systems were thought of in R.  
+2. "Object Oriented" **(OO)** objects. 
+> - OO objects typically have a **_class_** attribute that specify their object type.
 
-### 12.	Test for speed – what are different techniques to evaluate code speed, and diagnose computational bottle necks? Does the C++ code improve efficiency in this case? Does it depend on the order (‘O’) of computations – e.g. length of replicates etc. What can you say about how run time scales with length of replicates, vectors and so forth? Does it depend on the nature of the algorithm?  
+_Note:_ Use `sloop::otype()` or `sloop::s3_class()` to identify the types of objects in R.
 
-### 13.	Read The Pragmatic Programmer. What does implementation of DRY (pg 30) mean for your particular code? What is decoupling? How to you create orthogonality in code? What are some of the key messages in the ‘test to code’ chapter? Why ‘refactor’?
+All objects in R (Base and OO) have a **base type**. Base types are not part of the OO system, because functions that behave differently for different base objects are written primarily in C code that uses switch statements.  
+Examples of base types: NULL, logical, integer, double, character, list etc.  
+
+### S3
+- R's first and simplest OO system  
+- Very flexible system, and key to successful use is applying constraints yourself  
+- _Note:_ Look at the `vctrs` package page if using S3.  
+
+#### S3 object
+
+Base object with atleast a **class** atrribute  
+
+-  R is not strict about classes. The class attribute of any object can be set use `class(x) <- "class_name"` . 
+The S3 object behaves differently from its underlying base type when it's passed to a **generic fucntion** . 
+
+#### Functions that use S3 objects
+**Generic** --- Finds the right implementation depending on the type of object that is passed into it.  
+ - The implementation is called a **method** . An S3 method should not be called directly. You should rely on the generic to find the method using the object passed into it.  
+ - The process of finding the right method is called **method dispatch**.  
+ _Note:_ Use `sloop::s3_dispatch()` to see the process of method dispatch. Eg:  
+ ```
+ > sloop::s3_dispatch(print(as.Date("2020/01/01")))
+=> print.Date
+ * print.default
+ ```
+ **S3 Method**  --- The implementation for a specific class of object.  
+ - Functions with a special naming scheme, **generic.class()**  
+ - S3 generics and methods can be identified using `sloop::ftype()`. Eg:
+ ```
+ > sloop::ftype(print)
+[1] "S3"      "generic"
+> sloop::ftype(print.Date)
+[1] "S3"     "method"
+```
+### 9.	Read The Pragmatic Programmer. What does implementation of DRY (pg 30) mean for your particular code? What is decoupling? How to you create orthogonality in code? What are some of the key messages in the ‘test to code’ chapter? Why ‘refactor’?
+
+### 10.	In addition to the core part of the code (i.e. the key algorithm), think about data input and output, plotting, diagnostics (e.g. does the stochastic generator simulate the same statistics as the observed data?), and so forth. I anticipate you’ll be writing quite a few functions for these features. 
+
+### 11.	Implement plotting using the default R plots, as well as ggplot. What is the difference in approach? Do you have a preference? Read the ggplot book and form a view in terms of why this is becoming so popular but also why some people do not like it. 
+
+### 12.	Implement some of the core algorithms in C++ using the RCpp package. There is a chapter on doing this and some basic C++ commands in the Advanced R book. 
+
+### 13.	Test for speed – what are different techniques to evaluate code speed, and diagnose computational bottle necks? Does the C++ code improve efficiency in this case? Does it depend on the order (‘O’) of computations – e.g. length of replicates etc. What can you say about how run time scales with length of replicates, vectors and so forth? Does it depend on the nature of the algorithm?  
