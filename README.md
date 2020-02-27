@@ -3,7 +3,7 @@
 
 ### 1.	Basic elements of setting up a package, including naming, directory structure and so forth.  
 
-> __Naming:__ Can contain letters, numbers and periods. It must start with a letter and cannot end with a period. Wickham recommends against using periods to avoid confusion with the names of S3 methods. He also recommends against using a mix of uppercase and lowercase letters - since it makes the package name hard to remember and type.    
+> __Naming:__ Can contain letters, numbers and periods. It must start with a letter and cannot end with a period. Hadley recommends against using periods to avoid confusion with the names of S3 methods. He also recommends against using a mix of uppercase and lowercase letters - since it makes the package name hard to remember and type.    
 >  
 > Directory Structure inside the top-level directory __package_name/__  
 >   
