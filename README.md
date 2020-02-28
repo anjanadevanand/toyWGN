@@ -341,8 +341,8 @@ MyClass <- R6Class(class = "MyClass",
    
  #### Effects of Reference Sematics
    
- - A function call may modify it's R6 inputs in addition to modifying the return value.
- _Note_: Advanced R reccommends that a function that return a value or modify it's R6 inputs, but not both
+ - A function call may modify it's R6 inputs in addition to modifying the return value.  
+ _Note_: Advanced R reccommends that a function may either return a value or modify it's R6 inputs, but not both
  
  - Its possible to define a `$finalize` method that deletes the private fields of an R6 object when it is deleted
  
