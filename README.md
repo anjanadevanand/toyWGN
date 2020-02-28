@@ -333,6 +333,8 @@ MyClass <- R6Class(class = "MyClass",
  # Method Chaining
  x$<method1>$<method2>
  ```
+ The methods of the object would operate on some fields of the object modifying it in-place
+ 
  #### Important Methods in the `R6Class()` function call  
    
  - `$initialize` to define the intialization of instance of the class. Overrides the default `$new()`  
@@ -347,7 +349,11 @@ MyClass <- R6Class(class = "MyClass",
  - Its possible to define a `$finalize` method that deletes the private fields of an R6 object when it is deleted
  
  - If an R6 class is the default value of a field, it may be shared across all instances of an object if not defined properly.
+   
+ ## S4
  
+ - Similar to S3, but stricter  
+ - There are specialized functions for creating classes (`setClass()`), generics (`setGeneric()`), and methods (`setMethod()`)
  
  
  
