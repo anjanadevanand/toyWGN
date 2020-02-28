@@ -185,15 +185,16 @@ test_that("functionality description", {
 
 ### 8.	Implement the three different object systems (S3, S4, R6). What is the difference between them? When should you use one over the other? 
 
-### Notes on the Object Systems in R
+*****************
+### Notes on the Object Systems in R (from Advanced R)
 ### Why an object system?
 Code Sharing - to have functions that behave differently for different objects, with the same external interface.  
 eq: `print(as.Date("2020/01/01"))` behaves differently from `print("2020/01/01")`  
 
 
 ### Two Types of Objects in R
-1. Base Objects. These objects come from S, and were developed before object oriented systems were thought of in R.  
-2. "Object Oriented" **(OO)** objects. 
+1. **Base Objects**: These objects come from S, and were developed before object oriented systems were thought of in R.  
+2. **"Object Oriented" (OO) Objects**  
 > - OO objects typically have a **_class_** attribute that specify their object type.
 
 _Note:_ Use `sloop::otype()` or `sloop::s3_class()` to identify the types of objects in R.
@@ -203,19 +204,27 @@ Examples of base types: NULL, logical, integer, double, character, list etc.
 
 ### S3
 - R's first and simplest OO system  
-- Very flexible system, and key to successful use is applying constraints yourself  
+- Very flexible system, so the key to successful use is to apply the constraints yourself  
 - _Note:_ Look at the `vctrs` package page if using S3.  
 
-#### S3 object
+#### S3 Object
 
 Base object with atleast a **class** atrribute  
 
--  R is not strict about classes. The class attribute of any object can be set use `class(x) <- "class_name"` . 
+-  R is not strict about classes. The class attribute of any object can be set using `class(x) <- "class_name"` . 
 The S3 object behaves differently from its underlying base type when it's passed to a **generic fucntion** . 
 
-#### Functions that use S3 objects
+- The class name can be any string. When creating a new class, Hadley strongly reccomends adding the package name in the class name, so that it does not clash with classes in other packages.  
+
+- Since S3 doesn't provide a format definition of a class, there is no built-in check to ensure that all objects of the same class have the same structure (i.e., the same base type and attributes). So this uniformity has be enforced by the creator of the class. 
+_Note:_ Hadley recommends providing three functions when creating new classes to ensure that objects of the same class are uniform.  
+> 1. **constructor (`new_myclass()`):** Function that creates new objects of the correct structure.  
+> 2. **validator (`validate_myclass()`):** Function that performs checks to ensure that the object has correct values.  
+> 3. **helper(`myclass()`):** Function to provide convenient way for users to create objects of the new class.
+
+#### Functions that Act on S3 Objects
 **Generic** --- Finds the right implementation depending on the type of object that is passed into it.  
- - The implementation is called a **method** . An S3 method should not be called directly. You should rely on the generic to find the method using the object passed into it.  
+ - The implementation is called a **method**. An S3 method should not be called directly. You should rely on the generic to find the method using the object passed into it.  
  - The process of finding the right method is called **method dispatch**.  
  _Note:_ Use `sloop::s3_dispatch()` to see the process of method dispatch. Eg:  
  ```
@@ -232,6 +241,21 @@ The S3 object behaves differently from its underlying base type when it's passed
 > sloop::ftype(print.Date)
 [1] "S3"     "method"
 ```
+**How do Generics and Methods Work?**
+
+S3 generic performs method dispatch (i.e., finds the method for a specific class) based on the first argument passed to the generic (typically). The generic calls `UseMethod()` to find the method required. 
+> * `UseMethod()` uses `paste0("generic", ".", c(class(x), "default")` to search for potential methods. (This is why S3 methods have to be named `generic.class()`)
+
+A generic function looks like this:
+```
+generic <- function(x, ...) {
+  UseMethod("generic")
+}
+```
+_Note:_ Advanced R warns against doing any computation inside a generic. The generic should only call `UseMethod()`.  
+
+
+
 ### 9.	Read The Pragmatic Programmer. What does implementation of DRY (pg 30) mean for your particular code? What is decoupling? How to you create orthogonality in code? What are some of the key messages in the ‘test to code’ chapter? Why ‘refactor’?
 
 ### 10.	In addition to the core part of the code (i.e. the key algorithm), think about data input and output, plotting, diagnostics (e.g. does the stochastic generator simulate the same statistics as the observed data?), and so forth. I anticipate you’ll be writing quite a few functions for these features. 
