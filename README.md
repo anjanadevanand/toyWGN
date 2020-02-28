@@ -252,7 +252,57 @@ generic <- function(x, ...) {
   UseMethod("generic")
 }
 ```
-_Note:_ Advanced R warns against doing any computation inside a generic. The generic should only call `UseMethod()`.  
+_Note1:_ Advanced R warns against doing any computation inside a generic. The generic should only call `UseMethod()`.  
+_Note2:_ A Method must have the same arguments as it's generic, unless the generic has `...` argument. In this case, the method can have a superset of arguments.  
+
+Each generic has a default method `generic.default()`. This gets called if the specific class in question does not have a method defined for it.  
+
+**More Compilcated Aspects of Method Dispatch**  
+   
+**1. Inheritance**  
+  
+S3 classes can share behaviour by having a character **_vector_** as the class. The first element of the class vector is a **_subclass_** of the second vector  
+```
+> class(as.POSIXlt(as.Date("2020/01/01")))
+[1] "POSIXlt" "POSIXt"
+```
+To create a subclass
+> 1. the parent constructor needs to have `...` and `class` arguments    
+Recommendations while creating a sub-class
+> 1. base type of subclass and superclass should be the same  
+> 2. attributes of the subclass should be a superset of the attributes of the superclass
+
+`NextMethod()` : Function to call the method that would have been called if the method for a class did not exist. The function is useful to define a new method on internal generics that preserves the class and subclass of the object it returns. (For example, `` `[` `` is an internal generic, and `NextMethod()` may be used to define subsetting behaviour that preserves the class of the subset returned).  
+
+**2. S3 Dispath on Base Objects**  
+  
+Base objects have **implicit class** asccociated with them. These can be seen using `sloop::s3_class()`. 
+```
+> sloop::s3_class(1:10)
+[1] "integer" "numeric"
+```
+S3 generics dispath on the implicit class of base objects when these functions are called on base objects.
+
+**3. Internal Generics**  
+  
+Functions like `` `[` ``, `sum()`, `length()` . These generic do not dispatch to methods unless a class attribute has been set (i.e., they perform method dispatch only for S3 objects)
+
+**4. Group Generics**  
+  
+The term referes to generic functions that are grouped together. There are four group generics:  
+**Math:** `abs()`, `log()`, `sin()`, `cos()`, etc.  
+**Ops:** `+`, `-`, `==`, `<`, `>`, `&`, `|`, etc.  
+**Summary:** `sum()`, `min()`, `max()`, `all()`, `any()` etc.  
+**Complex:** `Im()`, `Re()` etc.  
+  
+If a S3 method is defined on the group generic for a class (eg: `Math.class()`), this method gets called when any of the functions within the group are called on an S3 object of that class (eg: `abs(S3 obj of class)` or `log(S3 obj of class)`)
+
+**5. Double Dispatch**  
+  
+
+
+
+
 
 
 
