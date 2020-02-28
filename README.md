@@ -290,16 +290,16 @@ Functions like `` `[` ``, `sum()`, `length()` . These generic do not dispatch to
 **4. Group Generics**  
   
 The term referes to generic functions that are grouped together. There are four group generics:  
-**Math:** `abs()`, `log()`, `sin()`, `cos()`, etc.  
-**Ops:** `+`, `-`, `==`, `<`, `>`, `&`, `|`, etc.  
-**Summary:** `sum()`, `min()`, `max()`, `all()`, `any()` etc.  
-**Complex:** `Im()`, `Re()` etc.  
+**`Math`:** `abs()`, `log()`, `sin()`, `cos()`, etc.  
+**`Ops`:** `+`, `-`, `==`, `<`, `>`, `&`, `|`, etc.  
+**`Summary`:** `sum()`, `min()`, `max()`, `all()`, `any()` etc.  
+**`Complex`:** `Im()`, `Re()` etc.  
   
 If a S3 method is defined on the group generic for a class (eg: `Math.class()`), this method gets called when any of the functions within the group are called on an S3 object of that class (eg: `abs(S3 obj of class)` or `log(S3 obj of class)`)
 
 **5. Double Dispatch**  
   
-
+For generics in the `Ops` group (`+`, `-`), S3 dispatch finds a method by dispatching on both the arguments to the generic. To preserve commutative property of the operators.  
 
 
 
