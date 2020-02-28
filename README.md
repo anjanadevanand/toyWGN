@@ -188,7 +188,7 @@ test_that("functionality description", {
 *****************
 ### Notes on the Object Systems in R (from Advanced R)
 ### Why an object system?
-Code Sharing - to have functions that behave differently for different objects, with the same external interface.  
+To have functions that behave differently for different objects, with the same external interface.  
 eq: `print(as.Date("2020/01/01"))` behaves differently from `print("2020/01/01")`  
 
 
