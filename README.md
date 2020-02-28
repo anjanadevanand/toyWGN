@@ -301,6 +301,59 @@ If a S3 method is defined on the group generic for a class (eg: `Math.class()`),
   
 For generics in the `Ops` group (`+`, `-`), S3 dispatch finds a method by dispatching on both the arguments to the generic. To preserve commutative property of the operators.  
 
+### R6
+  
+- Used encapsulated OOP. So, **methods belong to objects** not generics. The function call would be `object$method()`.  
+- R6 objects can be modified in place. There is an R6 library in R to create and use R6 objects. `R6Class()` is the function used to create both the class and it's methods.  
+> ```
+> # What does modify in place do?
+> x = [1, 2]
+> y = x
+> y[1] = 10     # would change x also
+> ```
+
+#### R6 Class Definition and Use
+  
+**Definition of a an R6 Class Object using `R6Class()` Function**  
+```
+MyClass <- R6Class(class = "MyClass",
+                   inherit = ParentClass,                    # If Applicable
+                   public = list(<methods-and-fields>),      # Methods are functions, fields are everything else (typically variables)
+                   private = list(<methods-and-fields>),     # Methods and fields accessible only from inside the class
+                   active = list(<dynamic-fields-calc-using-fns>))   # active bindings to calculate
+ ```
+ **Creating R6 Class Objects**
+ ```
+ x <- MyClass$new()
+ 
+ # Accessing fields and methods within the R6 Class object
+ x$<field-name>
+ x$<method-name>
+ 
+ # Method Chaining
+ x$<method1>$<method2>
+ ```
+ #### Important Methods in the `R6Class()` function call  
+   
+ - `$initialize` to define the intialization of instance of the class. Overrides the default `$new()`  
+ - `$print`
+ - `$clone` to create a copy of the R6 object instead of modifying it in place
+   
+ #### Effects of Reference Sematics
+   
+ - A function call may modify it's R6 inputs in addition to modifying the return value.
+ _Note_: Advanced R reccommends that a function that return a value or modify it's R6 inputs, but not both
+ 
+ - Its possible to define a `$finalize` method that deletes the private fields of an R6 object when it is deleted
+ 
+ - If an R6 class is the default value of a field, it may be shared across all instances of an object if not defined properly.
+ 
+ 
+ 
+ 
+
+                   
+
 
 
 
