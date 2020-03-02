@@ -405,7 +405,7 @@ It is possible to use S3 or base objects in the slots of S4 objects. It is also 
 
 ### Tradeoffs
 
-Hadley recommends using the S3 object system if there isn't a strong case to use S4 or R6. Advantage is that it is simpler, and there are known approaches to overcoming shortcomings.
+Hadley recommends using the S3 object system if there isn't a strong case to use S4 or R6. Advantage is that it is simpler, and there are known approaches to overcome shortcomings.
 
 #### S4 vs. S3
 - Main difference is that S4 is stricter. 
@@ -414,7 +414,7 @@ Hadley recommends using the S3 object system if there isn't a strong case to use
 - Main challenge with S4 - too complex, lacks documentation.  
 
 #### R6 vs. S3
-- Very different from S3 and S4 because it is built on encapsulated objects. R6 objects have reference sematics (modified in  place), and this has consequences.  
+- Very different from S3 and S4 because it is built on encapsulated objects. R6 objects have reference sematics (modify in  place), and this has consequences.  
 > - R6 method lives in the local namespace of an object. So it does not interact with other functions of the same name in other objects or packages. The function names can be speciifc and it can use different arguments suited for each object (since it the arguments do not have to pass through a common generic).  
 > - Reference sematics allow functions to simultaneously return a value and modify an object. Modifiy and return can be useful for specific cases.   
 > - Easier to implement method chaining 
