@@ -415,7 +415,7 @@ Hadley recommends using the S3 object system if there isn't a strong case to use
 
 #### R6 vs. S3
 - Very different from S3 and S4 because it is built on encapsulated objects. R6 objects have reference sematics (modify in  place), and this has consequences.  
-> - R6 method lives in the local namespace of an object. So it does not interact with other functions of the same name in other objects or packages. The function names can be speciifc and it can use different arguments suited for each object (since it the arguments do not have to pass through a common generic).  
+> - R6 method lives in the local namespace of an object. So it does not interact with other functions of the same name in other objects or packages. Need not be too careful with function names and the function can use different arguments suited for each object (since the arguments do not have to pass through a common generic).  
 > - Reference sematics allow functions to simultaneously return a value and modify an object. Modifiy and return can be useful for specific cases.   
 > - Easier to implement method chaining 
  
