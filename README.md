@@ -354,6 +354,70 @@ MyClass <- R6Class(class = "MyClass",
  
  - Similar to S3, but stricter  
  - There are specialized functions for creating classes (`setClass()`), generics (`setGeneric()`), and methods (`setMethod()`)
+ - S4 supportes multiple inheritance (multiple parents), and multiple dispatch (dispatch on the class of multiple arguments)
+
+### S4 Objects
+
+- Contain named components called **_slots_**. These are accessed using @, similar to $ for lists.
+
+S4 class definition
+
+```
+setClass("myclass", 
+   contains = "parentclass"
+   slots = c(
+     name1 = "character",
+     name2 = "numeric"
+   )
+   prototype = list(
+     name1 = NA_character_
+     name2 = NA_real_
+   )
+)
+```
+
+An object of the class can be constructed using new `S4_obj <- new("myclass", name1 = "a", name2 = 1)`
+The `setValidity()` method may be used to impose additional constraints and assess the validity of new objects created. `new()` automatically validates the object using the specifications set in `setValidity` when creating new S4 objects.
+
+Functions for the S4 class may be defined using `setGeneric()` and `setMethod()`
+
+```
+setGeneric("myGeneric", function(x, ....) standardGeneric("myGeneric"), signature = "x")
+setMethod("myGeneric", "myclass", function(x, ...) {
+   # method implementation
+})
+```
+The second argument to `setMethod()` is the signature. The signature can include multiple arguments to perform double dispatch. So, double dispatch need not be included as a special case as in S3.
+
+S4 methods defined for a class typically include accessor functions to modify the values of its slots, and show function to define how the object prints.
+
+#### S4 Method Dispatch
+- Uses multiple dispatch and multiple inheritance - making it much more complicated that S3 method dispatch.  
+
+Multiple Inheritance
+- Define fewer methods to work on related classes. Have to ensure that methods exists for the terminal nodes (the end parent classes), and that there is no ambiguity in choosing the method for classes inheriting from multiple parent classes.  
+- S4 uses pseudo-class **ANY** (similar to S3 default), that is applied when the method for a class is not defined.  
+
+Multiple Dispatch
+- Dispatch on two or more arguments.  
+
+It is possible to use S3 or base objects in the slots of S4 objects. It is also possible to convert existing S3 methods to S4 methods.  
+
+### Tradeoffs
+
+Hadley recommends using the S3 object system if there isn't a strong case to use S4 or R6. Advantage is that it is simpler, and there are known approaches to overcoming shortcomings.
+
+#### S4 vs. S3
+- Main difference is that S4 is stricter. 
+- S4 requires more upfront design, it may be suitable for larger projects and teams.  
+- Good fit for a complex system of interelated objects - possible to reduce code duplication through careful implementation of methods (eg: Matrix Package - 102 classes, 21 generic functions, 1993 methods). 
+- Main challenge with S4 - too complex, lacks documentation.  
+
+#### R6 vs. S3
+- Very different from S3 and S4 because it is built on encapsulated objects. R6 objects have reference sematics (modified in  place), and this has consequences.  
+> - R6 method lives in the local namespace of an object. So it does not interact with other functions of the same name in other objects or packages. The function names can be speciifc and it can use different arguments suited for each object (since it the arguments do not have to pass through a common generic).  
+> - Reference sematics allow functions to simultaneously return a value and modify an object. Modifiy and return can be useful for specific cases.   
+> - Easier to implement method chaining 
  
  
  
