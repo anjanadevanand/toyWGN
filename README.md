@@ -209,12 +209,12 @@ Examples of base types: NULL, logical, integer, double, character, list etc.
 
 #### S3 Object
 
-Base object with atleast a **class** atrribute  
+Base object with atleast a **class** attribute  
 
 -  R is not strict about classes. The class attribute of any object can be set using `class(x) <- "class_name"` . 
-The S3 object behaves differently from its underlying base type when it's passed to a **generic fucntion** . 
+The S3 object behaves differently from its underlying base type when it's passed to a **generic function** . 
 
-- The class name can be any string. When creating a new class, Hadley strongly reccomends adding the package name in the class name, so that it does not clash with classes in other packages.  
+- The class name can be any string. When creating a new class, Hadley strongly reccommends adding the package name in the class name, so that it does not clash with classes in other packages.  
 
 - Since S3 doesn't provide a format definition of a class, there is no built-in check to ensure that all objects of the same class have the same structure (i.e., the same base type and attributes). So this uniformity has be enforced by the creator of the class. 
 _Note:_ Hadley recommends providing three functions when creating new classes to ensure that objects of the same class are uniform.  
