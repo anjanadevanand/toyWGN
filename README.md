@@ -307,9 +307,16 @@ For generics in the `Ops` group (`+`, `-`), S3 dispatch finds a method by dispat
 - R6 objects can be modified in place. There is an R6 library in R to create and use R6 objects. `R6Class()` is the function used to create both the class and it's methods.  
 > ```
 > # What does modify in place do?
+> # Example from Python
 > x = [1, 2]
 > y = x
 > y[1] = 10     # would change x also
+> print(y)
+> print(x)
+>  
+> Output:
+> [1, 10]
+> [1, 10]
 > ```
 
 #### R6 Class Definition and Use
